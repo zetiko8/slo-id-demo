@@ -1,0 +1,92 @@
+{
+  "name": "slo-id-demo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/slo-id-demo/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/slo-id-demo",
+        "index": "apps/slo-id-demo/src/index.html",
+        "browser": "apps/slo-id-demo/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/slo-id-demo/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/slo-id-demo/src/favicon.ico",
+          "apps/slo-id-demo/src/assets"
+        ],
+        "styles": ["apps/slo-id-demo/src/styles.scss"],
+        "scripts": [],
+        "server": "apps/slo-id-demo/src/main.server.ts",
+        "prerender": true,
+        "ssr": {
+          "entry": "apps/slo-id-demo/server.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "slo-id-demo:build:production"
+        },
+        "development": {
+          "buildTarget": "slo-id-demo:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "slo-id-demo:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/slo-id-demo/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "slo-id-demo:build",
+        "staticFilePath": "dist/apps/slo-id-demo/browser",
+        "spa": true
+      }
+    }
+  }
+}
