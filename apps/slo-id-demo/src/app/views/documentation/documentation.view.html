@@ -1,0 +1,88 @@
+<main class="p-normal">
+  <h1>&#64;zetiko/slo-id</h1>
+  <article>
+    <section>
+      <section>
+        <checkbox-group
+          [formControl]="columns"
+          [options]="options"
+        >
+        </checkbox-group>
+      </section>
+      <section>
+        <button (click)="generatePerson()">GENERATE A PERSON</button>
+      </section>
+    </section>
+    <section>
+      <table
+        *ngIf="ssrContextService.isClientSide"
+      >
+        <thead>
+          <tr>
+            <th
+              [hidden]="!columns.value?.['name']"
+            >Name</th>
+            <th
+              [hidden]="!columns.value?.['birthDate']"
+            >Birth Date</th>
+            <th
+              [hidden]="!columns.value?.['age']"
+            >Age</th>
+            <th
+              [hidden]="!columns.value?.['email']"
+            >Email</th>
+            <th
+              [hidden]="!columns.value?.['mobileNumber']"
+            >Mobile Number</th>
+            <th
+              [hidden]="!columns.value?.['gender']"
+            >Gender</th>
+            <th
+              [hidden]="!columns.value?.['address']"
+            >Address</th>
+            <th
+              [hidden]="!columns.value?.['iban']"
+            >IBAN</th>
+            <th
+              [hidden]="!columns.value?.['vat']"
+            >VAT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let person of persons">
+            <td
+              [hidden]="!columns.value?.['name']"
+            >{{ person.name.firstName }} {{ person.name.surname }}</td>
+            <td
+            [hidden]="!columns.value?.['birthDate']"
+            >{{ person.birthDate.dateString }}</td>
+            <td
+            [hidden]="!columns.value?.['age']"
+            >{{ person.birthDate.age }}</td>
+            <td
+            [hidden]="!columns.value?.['email']"
+            >{{ person.email }}</td>
+            <td
+            [hidden]="!columns.value?.['mobileNumber']"
+            >{{ person.mobileNumber }}</td>
+            <td
+            [hidden]="!columns.value?.['gender']"
+            >{{ person.gender === 'M' ? 'MALE' : 'FEMALE' }}</td>
+            <td
+            [hidden]="!columns.value?.['address']"
+            >
+              {{ person.address.street }}, {{ person.address.zipCode }} {{
+              person.address.city }}
+            </td>
+            <td
+            [hidden]="!columns.value?.['iban']"
+            >{{ person.iban }}</td>
+            <td
+            [hidden]="!columns.value?.['vat']"
+            >{{ person.vatId }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </article>
+</main>

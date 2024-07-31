@@ -10,7 +10,7 @@
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/slo-id-demo",
+        "outputPath": "devops/dist/slo-id-demo",
         "index": "apps/slo-id-demo/src/index.html",
         "browser": "apps/slo-id-demo/src/main.ts",
         "polyfills": ["zone.js"],

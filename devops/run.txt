@@ -1,0 +1,6 @@
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx-selfsigned.key -out nginx-selfsigned.crt
+- Common Name (e.g. server FQDN or YOUR name) []:62.171.161.203
+docker stop slo-id-demo
+docker rm slo-id-demo
+docker build --tag slo-id-demo .
+docker run -d -p 8400:80 -p 8401:443 --name slo-id-demo slo-id-demo

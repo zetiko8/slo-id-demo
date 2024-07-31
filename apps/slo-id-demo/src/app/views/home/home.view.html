@@ -1,0 +1,24 @@
+<main class="p-normal">
+  <h1>&#64;zetiko/slo-id</h1>
+  <article>
+    <section>
+      <!-- <tabs-header
+        [tabs]="[
+        {
+          id: 'table',
+          label: 'Table'
+        },
+        {
+          id: 'json',
+          label: 'Json'
+        },
+        ]"
+        [selectedTab]="tab"
+        (tabSelected)="tab = $event"
+      ></tabs-header> -->
+      <demo-table
+        *ngIf="tab === 'table'"
+      ></demo-table>
+    </section>
+  </article>
+</main>

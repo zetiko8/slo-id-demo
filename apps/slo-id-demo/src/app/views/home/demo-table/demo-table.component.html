@@ -1,0 +1,128 @@
+  <div
+    *ngIf="tab === 'table'"
+  >
+    <div>
+      <checkbox-group
+        [formControl]="columns"
+        [options]="options"
+      >
+      </checkbox-group>
+    </div>
+    <div
+      class="d-flex gap-small"
+    >
+      <button (click)="generatePerson()">GENERATE A PERSON</button>
+      <button (click)="downloadJson()">DOWNLOAD</button>
+    </div>
+    <table
+      *ngIf="ssrContextService.isClientSide"
+    >
+      <thead>
+        <tr>
+          <th
+            [hidden]="!columns.value?.['name']"
+          >Name</th>
+          <th
+            [hidden]="!columns.value?.['firstName']"
+          >First name</th>
+          <th
+            [hidden]="!columns.value?.['surname']"
+          >Surname</th>
+          <th
+            [hidden]="!columns.value?.['birthDate']"
+          >Birth Date</th>
+          <th
+            [hidden]="!columns.value?.['isoBirthDate']"
+          >Iso Birth Date</th>
+          <th
+            [hidden]="!columns.value?.['age']"
+          >Age</th>
+          <th
+            [hidden]="!columns.value?.['email']"
+          >Email</th>
+          <th
+            [hidden]="!columns.value?.['mobileNumber']"
+          >Mobile Number</th>
+          <th
+            [hidden]="!columns.value?.['gender']"
+          >Gender</th>
+          <th
+            [hidden]="!columns.value?.['address']"
+          >Address</th>
+          <th
+            [hidden]="!columns.value?.['street']"
+          >Street</th>
+          <th
+            [hidden]="!columns.value?.['zipCode']"
+          >Zip Code</th>
+          <th
+            [hidden]="!columns.value?.['city']"
+          >City</th>
+          <th
+            [hidden]="!columns.value?.['iban']"
+          >IBAN</th>
+          <th
+            [hidden]="!columns.value?.['vat']"
+          >VAT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of persons">
+          <td
+            [hidden]="!columns.value?.['name']"
+          >{{ person.name.firstName }} {{ person.name.surname }}</td>
+          <td
+            [hidden]="!columns.value?.['firstName']"
+          >{{ person.name.firstName }}</td>
+          <td
+            [hidden]="!columns.value?.['surname']"
+          >{{ person.name.surname }}</td>
+          <td
+          [hidden]="!columns.value?.['birthDate']"
+          >{{ person.birthDate.dateString }}</td>
+          <td
+          [hidden]="!columns.value?.['isoBirthDate']"
+          >{{ person.birthDate.date.toISOString() }}</td>
+          <td
+          [hidden]="!columns.value?.['age']"
+          >{{ person.birthDate.age }}</td>
+          <td
+          [hidden]="!columns.value?.['email']"
+          >{{ person.email }}</td>
+          <td
+          [hidden]="!columns.value?.['mobileNumber']"
+          >{{ person.mobileNumber }}</td>
+          <td
+          [hidden]="!columns.value?.['gender']"
+          >{{ person.gender === 'M' ? 'MALE' : 'FEMALE' }}</td>
+          <td
+          [hidden]="!columns.value?.['address']"
+          >
+            {{ person.address.street }}, {{ person.address.zipCode }} {{
+            person.address.city }}
+          </td>
+          <td
+          [hidden]="!columns.value?.['street']"
+          >
+            {{ person.address.street }}
+          </td>
+          <td
+          [hidden]="!columns.value?.['zipCode']"
+          >
+            {{ person.address.zipCode }}
+          </td>
+          <td
+          [hidden]="!columns.value?.['city']"
+          >
+            {{ person.address.city }}
+          </td>
+          <td
+          [hidden]="!columns.value?.['iban']"
+          >{{ person.iban }}</td>
+          <td
+          [hidden]="!columns.value?.['vat']"
+          >{{ person.vatId }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
